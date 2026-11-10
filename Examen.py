@@ -100,7 +100,7 @@ while True:
             registrar_producto(productos, pedido, codigo, cantidad)
 
         except ValueError:
-            print("Cantidad o codigo no valido.")
+            print("Intenta escribirlo de nuevo")
 
     elif opcion == "3":
 
