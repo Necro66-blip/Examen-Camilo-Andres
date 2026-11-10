@@ -1,5 +1,4 @@
 
-
 productos = {
     1: ("Pizza", 18000, 20),
     2: ("Cafe", 5000, 15),
@@ -17,45 +16,51 @@ def mostrar_productos(productos):
 
         print(codigo, "|", nombre, "|", precio, "|", cantidad)
 
-def registrar_producto(productos, pedido, codigo, cantidad):
+def registrar_producto(productos, pedido, codigo, cantidad_solicitada):
 
     if codigo not in productos:
         print("Producto no encontrado.")
         return
 
-    if cantidad1 <= 0:
+    if cantidad_solicitada <= 0:
         print("Cantidad no valida.")
         return
 
-    nombre, precio, cantidad1 = productos[codigo]
+    nombre, precio, cantidad_disponible = productos[codigo]
 
-    if cantidad1 > cantidad:
+    if cantidad_solicitada > cantidad_disponible:
         print("No hay suficientes unidades disponibles.")
+        print("Unidades disponibles:", cantidad_disponible)
         return
- 
-    subtotal = precio * cantidad
 
-    pedido.append((codigo, nombre, cantidad, subtotal))
+    subtotal = precio * cantidad_solicitada
 
-    productos[codigo] = (nombre, precio, cantidad1 - cantidad)
+    pedido.append((codigo, nombre, cantidad_solicitada, subtotal))
 
-    print("Producto agregado correctamente.")
+    productos[codigo] = (
+        nombre,
+        precio,
+        cantidad_disponible - cantidad_solicitada
+    )
 
+    print("El producto fue agregado con exito")
+    
 def calcular_total(pedido):
     total = 0
+    
     for producto in pedido:
         total += producto[3]
     return total
 
 def mostrar_resumen(pedido):
 
-    print("========== RESUMEN DEL PEDIDO ==========")
+    print("\n========== RESUMEN DEL PEDIDO ==========")
     print("Producto       Cantidad     Subtotal")
     print("-----------------------------------------")
 
     for producto in pedido:
         codigo, nombre, cantidad, subtotal = producto
-        print(nombre, " ", cantidad, " ", subtotal)
+        print(nombre, "       ", cantidad, "       ", subtotal)
 
     total = calcular_total(pedido)
 
@@ -65,15 +70,14 @@ def mostrar_resumen(pedido):
         descuento = 0
 
     total_final = total - descuento
+
     print("-----------------------------------------")
     print("Total:", total)
     print("Descuento:", int(descuento))
-    print("El total final a pagar es: ", int(total_final))
-
+    print("El total final a pagar es:", int(total_final))
 pedido = []
 
 while True:
-
     print("\n========== CAFETERIA ==========")
     print("1. Mostrar productos")
     print("2. Agregar producto al pedido")
@@ -105,9 +109,9 @@ while True:
         else:
             print("No se registraron productos en el pedido")
 
-        print("\Graciaas por su compra")
+        print("\nGracias por comprar en nuestro restaurante de mala muerte ")
         break
-   
-    else:
 
-        print("Error")
+    else:
+        print("Error.")
+
