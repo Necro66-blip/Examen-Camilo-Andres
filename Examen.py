@@ -9,7 +9,7 @@ productos = {
 
 def mostrar_productos(productos):
     print("\n========== CATALOGO DE PRODUCTOS ==========")
-    print("Codigo | Producto       | Precio | Cantidad")
+    print("Codigo | Producto | Precio | Cantidad")
 
     for codigo, datos in productos.items():
         nombre, precio, cantidad = datos
